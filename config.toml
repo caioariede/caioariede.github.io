@@ -1,0 +1,20 @@
+baseurl = "//caioariede.github.io/"
+languageCode = "en-us"
+title = "Caio Ariede"
+theme = "cocoa"
+canonifyurls = true
+
+[params]
+Author = "Caio Ariede"
+CacheBuster = true
+DateForm = "Jan 2, 2006"
+DateFormFull = "Mon Jan 2 2006 15:04:05 MST"
+Description = "The website description"
+Email = "caio.ariede@gmail.com"
+FaviconFile = "img/leaf.ico"
+GATracker = "<Google-Analyics-ID>"
+GitHub = "//github.com/caioariede"
+Initials = "" # displayed on single post page
+Lang = "en"
+LinkedIn = "//linkedin.com/in/caioariede"
+Twitter = "//twitter.com/caioariede"
