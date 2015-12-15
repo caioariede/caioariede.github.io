@@ -6,8 +6,9 @@ title = "Intercepting function calls in Python scripts"
 +++
 
 This post is about [pyintercept](https://github.com/caioariede/pyintercept). A
-tool that I created to intercept functions in Python scripts without its source
-code. It patches the bytecode before executing it.
+tool that I created to intercept function calls in Python scripts without
+modifying its source code. It basically patches the bytecode before executing
+it.
 
 # A little history
 
@@ -16,7 +17,7 @@ challenging feature I faced was the dependency tracking. The tracking part is
 almost trivial, but extracting dependencies without actually running
 anything, like `python setup.py install` is hard.
 
-I could install it in an isolated environment like Docker, than check the
+I could install it in an isolated environment like Docker, and then check the
 installed libraries by doing something like `pip freeze` but I wanted to avoid
 the hassle of compiling heavy-weight stuff just to know its dependencies.
 
