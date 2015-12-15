@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="description" content="The website description">
+
+<base href="//caioariede.github.io/">
+<title>
+
+
+     Intercepting function calls in Python scripts 
+
+</title>
+<link rel="canonical" href="//caioariede.github.io/posts/intercepting-function-calls-in-python-scripts/">
+
+
+<script type="text/javascript">
+    var baseURL = '\/\/caioariede.github.io\/';
+    var host = baseURL.substring(0, baseURL.length - 1).replace(/\//g, '');
+    if ((host === window.location.host) && (window.location.protocol !== 'https:')) {
+        window.location.protocol = 'https:';
+    }
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="//caioariede.github.io/css/reset.css">
+<link rel="stylesheet" href="//caioariede.github.io/css/pygments.css">
+<link rel="stylesheet" href="//caioariede.github.io/css/main.css">
+
+
+
+
+
+<link rel="shortcut icon"
+
+    href="//caioariede.github.io/img/leaf.ico"
+
+>
+
+
+
+</head>
+
+
+<body lang="en">
+
+<div class="section header narrow"> 
+    <div class="container">
+        <div class="content">
+            <nav>
+                <ul>
+                    <a href="//caioariede.github.io/posts/"><li>Posts</li></a>
+                    <a href="//caioariede.github.io/about/"><li>About</li></a>
+                    <a href="//caioariede.github.io/code/"><li>Code</li></a>
+                    
+                </ul>
+            </nav>
+            <a href="//caioariede.github.io/"><div class="name">Caio Ariede</div></a>
+        </div>
+    </div>
+</div>
+
+<div class="section icons narrow">
+    <div class="container">
+        <div class="content">
+
+        
+            <a href="//github.com/caioariede" target="_blank">
+                <i class="icon ion-social-github"></i>
+            </a>
+        
+        
+        
+            <a href="//twitter.com/caioariede" target="_blank">
+                <i class="icon ion-social-twitter"></i>
+            </a>
+        
+
+        
+            <a href="//linkedin.com/in/caioariede" target="_blank">
+                <i class="icon ion-social-linkedin"></i>
+            </a>
+        
+
+        
+
+        
+
+        
+            <a href="mailto:caio.ariede@gmail.com">
+                <i class="icon ion-ios-email larger"></i>
+            </a>
+        
+        </div>
+    </div>
+</div>
+
+
+<div class="section main post">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+                        <a href="//caioariede.github.io/posts/intercepting-function-calls-in-python-scripts/">Intercepting function calls in Python scripts</a>
+                    </div>
+                    <div class="initials"><a href="//caioariede.github.io/"></a></div>
+                </div>
+                <div class="meta">
+                    <div class="date" title="Tue Dec 15 2015 14:31:05 BRST">Dec 15, 2015</div>
+                    <div class="reading-time"><div class="middot"></div>2 minutes read</div>
+                </div>
+            </div>
+            <div class="markdown">
+                
+
+<p>This post is about <a href="https://github.com/caioariede/pyintercept">pyintercept</a>. A
+tool that I created to intercept functions in Python scripts without its source
+code. It patches the bytecode before executing it.</p>
+
+<h1 id="a-piece-of-history:7fbaffeb3a450392adbb81457420bdce">A piece of history</h1>
+
+<p>When I started to develop <a href="http://codenizer.co/">Codenizer</a>, the first
+challenging feature I faced was the dependency tracking. The tracking part is
+almost trivial, but extracting dependencies without actually running
+anything, like <code>python setup.py install</code> is hard.</p>
+
+<p>I could install it in an isolated environment like Docker, than check the
+installed libraries by doing something like <code>pip freeze</code> but I wanted to avoid
+the hassle of compiling heavy-weight stuff just to know its dependencies.</p>
+
+<h1 id="installation:7fbaffeb3a450392adbb81457420bdce">Installation</h1>
+
+<pre><code>pip install pyintercept
+</code></pre>
+
+<h1 id="usage:7fbaffeb3a450392adbb81457420bdce">Usage</h1>
+
+<p>This is an example on how to use pyintercept to get the
+<a href="http://github.com/torchbox/wagtail">Wagtail</a> dependencies.</p>
+
+<pre><code>$ git clone https://github.com/torchbox/wagtail.git # Wagtail 1.2
+$ cd wagtail
+$ python -m pyintercept setup.py setuptools.setup --args=install --handler=pyintercept.pdb
+</code></pre>
+
+<p>Where:</p>
+
+<ul>
+<li><code>setuptools.setup</code> is the dotted path to the function will want to intercept</li>
+<li><code>--args=install</code> is used to pass arguments to the script (<code>setup.py</code>)</li>
+<li><code>--handler=pyintercept.pdb</code> is used to set the handler you want. There are
+some predefined handlers: <code>json</code>, <code>pdb</code>, <code>pickle</code> and <code>print</code>.</li>
+</ul>
+
+<p>Will drop you in a pdb console:</p>
+
+<pre><code>(Pdb) l
+1  	def pdb(origfn, *args, **kwargs):
+2  	    import pdb; pdb.set_trace()
+3  -&gt;       return origfn(*args, **kwargs)
+</code></pre>
+
+<pre><code>(Pdb) p origfn
+&lt;function setup at 0x1020ed9b0&gt;
+</code></pre>
+
+<pre><code>(Pdb) from pprint import pprint
+(Pdb) pprint(kwargs['install_requires'])
+['Django&gt;=1.7.1,&lt;1.10',
+'django-compressor&gt;=1.4',
+'django-modelcluster&gt;=1.0',
+'django-taggit&gt;=0.17.5',
+'django-treebeard==3.0',
+'djangorestframework&gt;=3.1.3',
+'Pillow&gt;=2.6.1',
+'beautifulsoup4&gt;=4.3.2',
+'html5lib&gt;=0.999,&lt;1',
+'Unidecode&gt;=0.04.14',
+'Willow&gt;=0.2.2,&lt;0.3']
+</code></pre>
+
+<p>We just intercepted the call to <code>setuptools.setup</code> without modifying any source
+code. The <code>origfn</code> argument contains the original function. The <code>*args</code> and
+<code>**kwargs</code> contains the arguments that would be passed to the original
+function.</p>
+
+<h2 id="advanced-usage:7fbaffeb3a450392adbb81457420bdce">Advanced usage</h2>
+
+<h3 id="defining-a-custom-handler:7fbaffeb3a450392adbb81457420bdce">Defining a custom handler</h3>
+
+<p>You can also, of course, write your own handlers. Let&rsquo;s write a custom handler
+that prints out to stdout all requirements in JSON format.</p>
+
+<p>Let&rsquo;s call it <code>amazing.py</code>:</p>
+
+<pre><code>def handler(*args, **kwargs):
+    import json
+    print(json.dumps(kwargs.get('install_requires')))
+</code></pre>
+
+<pre><code>python -m pyintercept setup.py setuptools.setup --args=install --handler=amazing.handler
+[&quot;Django&gt;=1.7.1,&lt;1.10&quot;, &quot;django-compressor&gt;=1.4&quot;, &quot;django-modelcluster&gt;=1.0&quot;, &quot;django-taggit&gt;=0.17.5&quot;, &quot;django-treebeard==3.0&quot;, &quot;djangorestframework&gt;=3.1.3&quot;, &quot;Pillow&gt;=2.6.1&quot;, &quot;beautifulsoup4&gt;=4.3.2&quot;, &quot;html5lib&gt;=0.999,&lt;1&quot;, &quot;Unidecode&gt;=0.04.14&quot;, &quot;Willow&gt;=0.2.2,&lt;0.3&quot;]
+</code></pre>
+
+<p>It&rsquo;s important to notice the <code>import</code> statement inside the handler function.
+You have to ensure that all the required stuff to make your handler work must
+be defined within it, otherwise it will not be injected and will cause errors.</p>
+
+                <br>
+                <p><a href="//caioariede.github.io/posts/">Back to posts</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+    var pageTracker = _gat._getTracker("\x3cGoogle-Analyics-ID\x3e");
+    pageTracker._trackPageview();
+} catch(err) {}
+</script>
+
+
+
+</body>
+</html>
+
