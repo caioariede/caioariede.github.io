@@ -7,8 +7,7 @@ title = "Intercepting function calls in Python scripts"
 
 This post is about [pyintercept](https://github.com/caioariede/pyintercept). A
 tool that I created to intercept function calls in Python scripts without
-modifying its source code. It basically patches the bytecode before executing
-it.
+modifying its source code. It basically patches the bytecode before executing.
 
 # A little history
 
@@ -27,7 +26,7 @@ the hassle of compiling heavy-weight stuff just to know its dependencies.
 
 # Usage
 
-This is an example on how to use pyintercept to get the
+This is an example of how to use pyintercept to get the
 [Wagtail](http://github.com/torchbox/wagtail) dependencies.
 
 ```
@@ -38,12 +37,12 @@ $ python -m pyintercept setup.py setuptools.setup --args=install --handler=pyint
 
 Where:
 
-- `setuptools.setup` is the dotted path to the function will want to intercept
+- `setuptools.setup` is the dotted path to the function we want to intercept
 - `--args=install` is used to pass arguments to the script (`setup.py`)
 - `--handler=pyintercept.pdb` is used to set the handler you want. There are
 some predefined handlers: `json`, `pdb`, `pickle` and `print`.
 
-Will drop you in a pdb console:
+It will drop you in a pdb console:
 
 ```
 (Pdb) l
@@ -73,8 +72,8 @@ Will drop you in a pdb console:
 'Willow>=0.2.2,<0.3']
 ```
 
-We just intercepted the call to `setuptools.setup` without modifying any source
-code. The `origfn` argument contains the original function. The `*args` and
+Okay, so we just intercepted the call to `setuptools.setup` without touching
+any code. The `origfn` argument contains the original function. The `*args` and
 `**kwargs` contains the arguments that would be passed to the original
 function.
 
@@ -99,5 +98,5 @@ python -m pyintercept setup.py setuptools.setup --args=install --handler=amazing
 ```
 
 It's important to notice the `import` statement inside the handler function.
-You have to ensure that all the required stuff to make your handler work must
-be defined within it, otherwise it will not be injected and will cause errors.
+You'll have to ensure that all the required stuff to make your handler work is
+defined within it, otherwise it will not be injected and will cause errors.
