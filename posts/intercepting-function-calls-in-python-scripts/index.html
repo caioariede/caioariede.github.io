@@ -124,8 +124,7 @@
 
 <p>This post is about <a href="https://github.com/caioariede/pyintercept">pyintercept</a>. A
 tool that I created to intercept function calls in Python scripts without
-modifying its source code. It basically patches the bytecode before executing
-it.</p>
+modifying its source code. It basically patches the bytecode before executing.</p>
 
 <h1 id="a-little-history:7fbaffeb3a450392adbb81457420bdce">A little history</h1>
 
@@ -145,7 +144,7 @@ the hassle of compiling heavy-weight stuff just to know its dependencies.</p>
 
 <h1 id="usage:7fbaffeb3a450392adbb81457420bdce">Usage</h1>
 
-<p>This is an example on how to use pyintercept to get the
+<p>This is an example of how to use pyintercept to get the
 <a href="http://github.com/torchbox/wagtail">Wagtail</a> dependencies.</p>
 
 <pre><code>$ git clone https://github.com/torchbox/wagtail.git # Wagtail 1.2
@@ -156,13 +155,13 @@ $ python -m pyintercept setup.py setuptools.setup --args=install --handler=pyint
 <p>Where:</p>
 
 <ul>
-<li><code>setuptools.setup</code> is the dotted path to the function will want to intercept</li>
+<li><code>setuptools.setup</code> is the dotted path to the function we want to intercept</li>
 <li><code>--args=install</code> is used to pass arguments to the script (<code>setup.py</code>)</li>
 <li><code>--handler=pyintercept.pdb</code> is used to set the handler you want. There are
 some predefined handlers: <code>json</code>, <code>pdb</code>, <code>pickle</code> and <code>print</code>.</li>
 </ul>
 
-<p>Will drop you in a pdb console:</p>
+<p>It will drop you in a pdb console:</p>
 
 <pre><code>(Pdb) l
 1  	def pdb(origfn, *args, **kwargs):
@@ -189,8 +188,8 @@ some predefined handlers: <code>json</code>, <code>pdb</code>, <code>pickle</cod
 'Willow&gt;=0.2.2,&lt;0.3']
 </code></pre>
 
-<p>We just intercepted the call to <code>setuptools.setup</code> without modifying any source
-code. The <code>origfn</code> argument contains the original function. The <code>*args</code> and
+<p>Okay, so we just intercepted the call to <code>setuptools.setup</code> without touching
+any code. The <code>origfn</code> argument contains the original function. The <code>*args</code> and
 <code>**kwargs</code> contains the arguments that would be passed to the original
 function.</p>
 
@@ -213,8 +212,8 @@ that prints out to stdout all requirements in JSON format.</p>
 </code></pre>
 
 <p>It&rsquo;s important to notice the <code>import</code> statement inside the handler function.
-You have to ensure that all the required stuff to make your handler work must
-be defined within it, otherwise it will not be injected and will cause errors.</p>
+You&rsquo;ll have to ensure that all the required stuff to make your handler work is
+defined within it, otherwise it will not be injected and will cause errors.</p>
 
                 <br>
                 <p><a href="//caioariede.github.io/posts/">Back to posts</a></p>

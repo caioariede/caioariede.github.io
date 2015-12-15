@@ -19,8 +19,7 @@
 
 &lt;p&gt;This post is about &lt;a href=&#34;https://github.com/caioariede/pyintercept&#34;&gt;pyintercept&lt;/a&gt;. A
 tool that I created to intercept function calls in Python scripts without
-modifying its source code. It basically patches the bytecode before executing
-it.&lt;/p&gt;
+modifying its source code. It basically patches the bytecode before executing.&lt;/p&gt;
 
 &lt;h1 id=&#34;a-little-history:7fbaffeb3a450392adbb81457420bdce&#34;&gt;A little history&lt;/h1&gt;
 
@@ -40,7 +39,7 @@ the hassle of compiling heavy-weight stuff just to know its dependencies.&lt;/p&
 
 &lt;h1 id=&#34;usage:7fbaffeb3a450392adbb81457420bdce&#34;&gt;Usage&lt;/h1&gt;
 
-&lt;p&gt;This is an example on how to use pyintercept to get the
+&lt;p&gt;This is an example of how to use pyintercept to get the
 &lt;a href=&#34;http://github.com/torchbox/wagtail&#34;&gt;Wagtail&lt;/a&gt; dependencies.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;$ git clone https://github.com/torchbox/wagtail.git # Wagtail 1.2
@@ -51,13 +50,13 @@ $ python -m pyintercept setup.py setuptools.setup --args=install --handler=pyint
 &lt;p&gt;Where:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;setuptools.setup&lt;/code&gt; is the dotted path to the function will want to intercept&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;setuptools.setup&lt;/code&gt; is the dotted path to the function we want to intercept&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;--args=install&lt;/code&gt; is used to pass arguments to the script (&lt;code&gt;setup.py&lt;/code&gt;)&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;--handler=pyintercept.pdb&lt;/code&gt; is used to set the handler you want. There are
 some predefined handlers: &lt;code&gt;json&lt;/code&gt;, &lt;code&gt;pdb&lt;/code&gt;, &lt;code&gt;pickle&lt;/code&gt; and &lt;code&gt;print&lt;/code&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Will drop you in a pdb console:&lt;/p&gt;
+&lt;p&gt;It will drop you in a pdb console:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;(Pdb) l
 1  	def pdb(origfn, *args, **kwargs):
@@ -84,8 +83,8 @@ some predefined handlers: &lt;code&gt;json&lt;/code&gt;, &lt;code&gt;pdb&lt;/cod
 &#39;Willow&amp;gt;=0.2.2,&amp;lt;0.3&#39;]
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;We just intercepted the call to &lt;code&gt;setuptools.setup&lt;/code&gt; without modifying any source
-code. The &lt;code&gt;origfn&lt;/code&gt; argument contains the original function. The &lt;code&gt;*args&lt;/code&gt; and
+&lt;p&gt;Okay, so we just intercepted the call to &lt;code&gt;setuptools.setup&lt;/code&gt; without touching
+any code. The &lt;code&gt;origfn&lt;/code&gt; argument contains the original function. The &lt;code&gt;*args&lt;/code&gt; and
 &lt;code&gt;**kwargs&lt;/code&gt; contains the arguments that would be passed to the original
 function.&lt;/p&gt;
 
@@ -108,8 +107,8 @@ that prints out to stdout all requirements in JSON format.&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;It&amp;rsquo;s important to notice the &lt;code&gt;import&lt;/code&gt; statement inside the handler function.
-You have to ensure that all the required stuff to make your handler work must
-be defined within it, otherwise it will not be injected and will cause errors.&lt;/p&gt;
+You&amp;rsquo;ll have to ensure that all the required stuff to make your handler work is
+defined within it, otherwise it will not be injected and will cause errors.&lt;/p&gt;
 </description>
     </item>
     
