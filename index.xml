@@ -21,7 +21,7 @@
 tool that I created to intercept functions in Python scripts without its source
 code. It patches the bytecode before executing it.&lt;/p&gt;
 
-&lt;h1 id=&#34;a-piece-of-history:7fbaffeb3a450392adbb81457420bdce&#34;&gt;A piece of history&lt;/h1&gt;
+&lt;h1 id=&#34;a-little-history:7fbaffeb3a450392adbb81457420bdce&#34;&gt;A little history&lt;/h1&gt;
 
 &lt;p&gt;When I started to develop &lt;a href=&#34;http://codenizer.co/&#34;&gt;Codenizer&lt;/a&gt;, the first
 challenging feature I faced was the dependency tracking. The tracking part is
