@@ -9,7 +9,7 @@ This post is about [pyintercept](https://github.com/caioariede/pyintercept). A
 tool that I created to intercept functions in Python scripts without its source
 code. It patches the bytecode before executing it.
 
-# A piece of history
+# A little history
 
 When I started to develop [Codenizer](http://codenizer.co/), the first
 challenging feature I faced was the dependency tracking. The tracking part is
