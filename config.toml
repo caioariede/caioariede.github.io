@@ -4,6 +4,10 @@ title = "Caio Ariede"
 theme = "cocoa"
 canonifyurls = true
 
+[permalinks]
+fixed = ":title/"
+posts = "posts/:slug/"
+
 [params]
 Author = "Caio Ariede"
 CacheBuster = true
