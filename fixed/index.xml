@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Fixeds on Caio Ariede</title>
+    <link>//caioariede.github.io/fixed/</link>
+    <description>Recent content in Fixeds on Caio Ariede</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 15 Dec 2015 22:48:56 -0200</lastBuildDate>
+    <atom:link href="//caioariede.github.io/fixed/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>projects</title>
+      <link>//caioariede.github.io/projects/</link>
+      <pubDate>Tue, 15 Dec 2015 22:48:56 -0200</pubDate>
+      
+      <guid>//caioariede.github.io/projects/</guid>
+      <description>
+
+&lt;p&gt;Here you can see a little bit about my open source projects.&lt;/p&gt;
+
+&lt;h2 id=&#34;django:3c42bb4157bf51d85ae7ffc4e1685909&#34;&gt;Django&lt;/h2&gt;
+
+&lt;h3 id=&#34;django-location-field:3c42bb4157bf51d85ae7ffc4e1685909&#34;&gt;django-location-field&lt;/h3&gt;
+
+&lt;p&gt;Provides a map widget where users can pick specific locations that will be
+stored in the database according to the model field attached to it. The model
+field can be either &lt;u&gt;plain&lt;/u&gt; or &lt;u&gt;spatial&lt;/u&gt; (when using PostGIS).&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/caioariede/django-location-field&#34;&gt;https://github.com/caioariede/django-location-field&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;django-input-mask:3c42bb4157bf51d85ae7ffc4e1685909&#34;&gt;django-input-mask&lt;/h3&gt;
+
+&lt;p&gt;Provides a collection of form fields that can be used to mask inputs, for
+decimal values, phone numbers, zip codes and so on.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/caioariede/django-input-mask&#34;&gt;https://github.com/caioariede/django-input-mask&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;openimob:3c42bb4157bf51d85ae7ffc4e1685909&#34;&gt;openimob&lt;/h3&gt;
+
+&lt;p&gt;An open-source CMS solution for Real Estate websites on top of Wagtail.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/caioariede/openimob&#34;&gt;https://github.com/caioariede/openimob&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;python:3c42bb4157bf51d85ae7ffc4e1685909&#34;&gt;Python&lt;/h2&gt;
+
+&lt;h3 id=&#34;pyintercept:3c42bb4157bf51d85ae7ffc4e1685909&#34;&gt;pyintercept&lt;/h3&gt;
+
+&lt;p&gt;A tool to intercept function calls in Python scripts.&lt;/p&gt;
+
+&lt;p&gt;Actually, I wrote a
+&lt;a href=&#34;//caioariede.github.io/posts/intercepting-function-calls-in-python-scripts/&#34;&gt;blog post explaining it.&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/caioariede/pyintercept&#34;&gt;https://github.com/caioariede/pyintercept&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;other:3c42bb4157bf51d85ae7ffc4e1685909&#34;&gt;Other&lt;/h2&gt;
+
+&lt;p&gt;Mostly for fun.&lt;/p&gt;
+
+&lt;h3 id=&#34;tpll:3c42bb4157bf51d85ae7ffc4e1685909&#34;&gt;Tpll&lt;/h3&gt;
+
+&lt;p&gt;Implementation of the Django Template Engine in Haskell.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/caioariede/tpll&#34;&gt;https://github.com/caioariede/tpll&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>about</title>
+      <link>//caioariede.github.io/about/</link>
+      <pubDate>Tue, 15 Dec 2015 22:20:58 -0200</pubDate>
+      
+      <guid>//caioariede.github.io/about/</guid>
+      <description>&lt;p&gt;I am a passionate developer doing &lt;u&gt;Python&lt;/u&gt; and &lt;u&gt;Django&lt;/u&gt; for living.&lt;/p&gt;
+
+&lt;p&gt;This does not mean I don&amp;rsquo;t do anything else. In my day to day, I am constantly
+managing &lt;u&gt;Linux servers&lt;/u&gt;, &lt;u&gt;Nginx&lt;/u&gt;, &lt;u&gt;PostgreSQL&lt;/u&gt;, &lt;u&gt;Redis&lt;/u&gt;
+and so on.&lt;/p&gt;
+
+&lt;p&gt;I love to learn new languages and contribute to open source projects, so if you
+go to my &lt;a href=&#34;http://github.com/caioariede&#34;&gt;GitHub&lt;/a&gt; page, you will probably see a
+mix of languages and projects. The languages I&amp;rsquo;m most interested in are:
+&lt;u&gt;Python&lt;/u&gt;, &lt;u&gt;Erlang&lt;/u&gt;, &lt;u&gt;Haskell&lt;/u&gt;, &lt;u&gt;Rust&lt;/u&gt; and &lt;u&gt;Go&lt;/u&gt;.&lt;/p&gt;
+
+&lt;p&gt;I am from Brazil, but I&amp;rsquo;ve been doing &lt;u&gt;remote work&lt;/u&gt; for some years.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;:wq -- and yes, I use Vim.
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
