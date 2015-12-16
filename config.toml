@@ -22,3 +22,4 @@ Initials = "" # displayed on single post page
 Lang = "en"
 LinkedIn = "//linkedin.com/in/caioariede"
 Twitter = "//twitter.com/caioariede"
+disqusShortname = "caioariede"
