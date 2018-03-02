@@ -10,11 +10,11 @@
     <atom:link href="/posts/" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>Detecting Django Version</title>
-      <link>//caioariede.github.io/posts/detecting-django-version/</link>
+      <title>Detecting which version of Django a website is running</title>
+      <link>//caioariede.github.io/posts/detecting-which-version-of-django-a-website-is-running/</link>
       <pubDate>Fri, 02 Mar 2018 15:57:37 -0300</pubDate>
       
-      <guid>//caioariede.github.io/posts/detecting-django-version/</guid>
+      <guid>//caioariede.github.io/posts/detecting-which-version-of-django-a-website-is-running/</guid>
       <description>&lt;p&gt;A few days ago, before doing a job interview I was studying the current tech
 stack of the company and started wondering how hard it would be to check which
 version of Django they were using.&lt;/p&gt;
