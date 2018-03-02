@@ -1,5 +1,5 @@
 ---
-title: "Detecting Django Version"
+title: "Detecting which version of Django a website is running"
 date: 2018-03-02T15:57:37-03:00
 
 ---
