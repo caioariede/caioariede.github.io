@@ -6,8 +6,94 @@
     <description>Recent content in Posts on Caio Ariede</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 15 Dec 2015 14:31:05 -0200</lastBuildDate>
-    <atom:link href="//caioariede.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 02 Mar 2018 15:57:37 -0300</lastBuildDate>
+    <atom:link href="/posts/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Detecting Django Version</title>
+      <link>//caioariede.github.io/posts/detecting-django-version/</link>
+      <pubDate>Fri, 02 Mar 2018 15:57:37 -0300</pubDate>
+      
+      <guid>//caioariede.github.io/posts/detecting-django-version/</guid>
+      <description>&lt;p&gt;A few days ago, before doing a job interview I was studying the current tech
+stack of the company and started wondering how hard it would be to check which
+version of Django they were using.&lt;/p&gt;
+
+&lt;p&gt;I first thought it wouldn&amp;rsquo;t be trivial but I quickly figured out an easy way of
+doing it. The approach is really stupid and will not work on every case, the
+detection is only possible if the following requirements are met:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;The project is using &lt;code&gt;django.contrib.admin&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;You managed to find the path to static files (usually, /static/)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The idea is to verify the presence or absence of some files that are included
+or removed between two versions. In some cases, no files were included or
+removed, so in these cases I just checked for changes. I&amp;rsquo;ve ended up with two
+basic checks:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;check if url exists&lt;/li&gt;
+&lt;li&gt;check if url exists AND contains a certain text&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/caioariede/detect-django-version&#34;&gt;The code&lt;/a&gt; is something
+like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;if url_exists(url):
+    return VERSION_1
+elif url_contains(url):
+    return VERSION_2
+...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;With only these two checks, I was able to cover Django versions from 2.0 to 1.3.
+I&amp;rsquo;ve done some tests myself and I&amp;rsquo;m frankly surprised how effective this
+approach was for my tests. I was also surprised to see some websites still
+using Django 1.3, damn.&lt;/p&gt;
+
+&lt;p&gt;I used the following script to perform my tests:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;from detect import detect
+
+URLS = [
+    &#39;http://example.com/static/admin&#39;,
+    ...
+]
+
+for url in urls:
+    print(url, detect(url))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Which gave me the following output:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;http://www.*****.com/static/admin 1.11
+http://app.******.com/static/admin 1.11
+http://***.********.com/static/admin 1.11
+http://support.cdn.*******.net/static/admin 1.8
+http://dashboard.*******.com/static/admin 1.8
+http://www.*************.com/static/admin 1.4
+http://********.fr/static/admin 1.4
+https://*****.com/assets/admin 1.9
+https://login.*****.com/site_media/admin 1.10
+https://******.******.com/static/admin 1.8
+http://www.*************.com/media/static/admin 1.4
+http://www.*************.com/media/admin 1.3
+http://********.org.uk/adminmedia 1.3
+http://******.*****.it/static/admin 1.8
+http://www.******.com/media/admin 1.4
+http://www.*********.com/static/admin 1.6
+http://www.*******************.fr/static/admin 1.4
+https://www.*******.es/static/admin 1.4
+https://www.****************.com/static/admin 1.10
+http://*********************.de/static/admin 1.6
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can find the code in &lt;a href=&#34;https://github.com/caioariede/detect-django-version&#34;&gt;this repository&lt;/a&gt;.
+If you want to propose an improvement, I&amp;rsquo;ll be happy to see a pull request there. :)&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Intercepting function calls in Python scripts</title>
@@ -21,7 +107,7 @@
 tool that I created to intercept function calls in Python scripts without
 modifying its source code. It basically patches the bytecode before executing.&lt;/p&gt;
 
-&lt;h1 id=&#34;a-little-history:7fbaffeb3a450392adbb81457420bdce&#34;&gt;A little history&lt;/h1&gt;
+&lt;h1 id=&#34;a-little-history&#34;&gt;A little history&lt;/h1&gt;
 
 &lt;p&gt;When I started to develop &lt;a href=&#34;http://codenizer.co/&#34;&gt;Codenizer&lt;/a&gt;, the first
 challenging feature I faced was the dependency tracking. The tracking part is
@@ -32,12 +118,12 @@ anything, like &lt;code&gt;python setup.py install&lt;/code&gt; is hard.&lt;/p&g
 installed libraries by doing something like &lt;code&gt;pip freeze&lt;/code&gt; but I wanted to avoid
 the hassle of compiling heavy-weight stuff just to know its dependencies.&lt;/p&gt;
 
-&lt;h1 id=&#34;installation:7fbaffeb3a450392adbb81457420bdce&#34;&gt;Installation&lt;/h1&gt;
+&lt;h1 id=&#34;installation&#34;&gt;Installation&lt;/h1&gt;
 
 &lt;pre&gt;&lt;code&gt;pip install pyintercept
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h1 id=&#34;usage:7fbaffeb3a450392adbb81457420bdce&#34;&gt;Usage&lt;/h1&gt;
+&lt;h1 id=&#34;usage&#34;&gt;Usage&lt;/h1&gt;
 
 &lt;p&gt;This is an example of how to use pyintercept to get the
 &lt;a href=&#34;http://github.com/torchbox/wagtail&#34;&gt;Wagtail&lt;/a&gt; dependencies.&lt;/p&gt;
@@ -88,9 +174,9 @@ any code. The &lt;code&gt;origfn&lt;/code&gt; argument contains the original fun
 &lt;code&gt;**kwargs&lt;/code&gt; contains the arguments that would be passed to the original
 function.&lt;/p&gt;
 
-&lt;h2 id=&#34;advanced-usage:7fbaffeb3a450392adbb81457420bdce&#34;&gt;Advanced usage&lt;/h2&gt;
+&lt;h2 id=&#34;advanced-usage&#34;&gt;Advanced usage&lt;/h2&gt;
 
-&lt;h3 id=&#34;defining-a-custom-handler:7fbaffeb3a450392adbb81457420bdce&#34;&gt;Defining a custom handler&lt;/h3&gt;
+&lt;h3 id=&#34;defining-a-custom-handler&#34;&gt;Defining a custom handler&lt;/h3&gt;
 
 &lt;p&gt;You can also, of course, write your own handlers. Let&amp;rsquo;s write a custom handler
 that prints out to stdout all requirements in JSON format.&lt;/p&gt;

@@ -118,7 +118,7 @@
                     <div class="initials"><a href="//caioariede.github.io/"></a></div>
                 </div>
                 <div class="meta">
-                    <div class="date" title="Tue Dec 15 2015 14:31:05 BRST">Dec 15, 2015</div>
+                    <div class="date" title="Tue Dec 15 2015 14:31:05 -02">Dec 15, 2015</div>
                     <div class="reading-time"><div class="middot"></div>2 minutes read</div>
                 </div>
             </div>
@@ -129,7 +129,7 @@
 tool that I created to intercept function calls in Python scripts without
 modifying its source code. It basically patches the bytecode before executing.</p>
 
-<h1 id="a-little-history:7fbaffeb3a450392adbb81457420bdce">A little history</h1>
+<h1 id="a-little-history">A little history</h1>
 
 <p>When I started to develop <a href="http://codenizer.co/">Codenizer</a>, the first
 challenging feature I faced was the dependency tracking. The tracking part is
@@ -140,12 +140,12 @@ anything, like <code>python setup.py install</code> is hard.</p>
 installed libraries by doing something like <code>pip freeze</code> but I wanted to avoid
 the hassle of compiling heavy-weight stuff just to know its dependencies.</p>
 
-<h1 id="installation:7fbaffeb3a450392adbb81457420bdce">Installation</h1>
+<h1 id="installation">Installation</h1>
 
 <pre><code>pip install pyintercept
 </code></pre>
 
-<h1 id="usage:7fbaffeb3a450392adbb81457420bdce">Usage</h1>
+<h1 id="usage">Usage</h1>
 
 <p>This is an example of how to use pyintercept to get the
 <a href="http://github.com/torchbox/wagtail">Wagtail</a> dependencies.</p>
@@ -196,9 +196,9 @@ any code. The <code>origfn</code> argument contains the original function. The <
 <code>**kwargs</code> contains the arguments that would be passed to the original
 function.</p>
 
-<h2 id="advanced-usage:7fbaffeb3a450392adbb81457420bdce">Advanced usage</h2>
+<h2 id="advanced-usage">Advanced usage</h2>
 
-<h3 id="defining-a-custom-handler:7fbaffeb3a450392adbb81457420bdce">Defining a custom handler</h3>
+<h3 id="defining-a-custom-handler">Defining a custom handler</h3>
 
 <p>You can also, of course, write your own handlers. Let&rsquo;s write a custom handler
 that prints out to stdout all requirements in JSON format.</p>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>//caioariede.github.io/</loc>
-    <lastmod>2015-12-15T22:48:56-02:00</lastmod>
-    <priority>0</priority>
+    <loc>//caioariede.github.io/posts/detecting-django-version/</loc>
+    <lastmod>2018-03-02T15:57:37-03:00</lastmod>
   </url>
   
   <url>
@@ -20,6 +20,34 @@
   <url>
     <loc>//caioariede.github.io/posts/intercepting-function-calls-in-python-scripts/</loc>
     <lastmod>2015-12-15T14:31:05-02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>//caioariede.github.io/</loc>
+    <lastmod>2018-03-02T15:57:37-03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//caioariede.github.io/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//caioariede.github.io/fixed/</loc>
+    <lastmod>2015-12-15T22:48:56-02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//caioariede.github.io/posts/</loc>
+    <lastmod>2018-03-02T15:57:37-03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//caioariede.github.io/tags/</loc>
+    <priority>0</priority>
   </url>
   
 </urlset>
