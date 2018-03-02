@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="description" content="The website description">
+
+<base href="//caioariede.github.io/">
+<title>
+
+
+     Detecting Django Version 
+
+</title>
+<link rel="canonical" href="//caioariede.github.io/posts/detecting-django-version/">
+
+
+<script type="text/javascript">
+    var baseURL = '\/\/caioariede.github.io\/';
+    var host = baseURL.substring(0, baseURL.length - 1).replace(/\//g, '');
+    if ((host === window.location.host) && (window.location.protocol !== 'https:')) {
+        window.location.protocol = 'https:';
+    }
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="//caioariede.github.io/css/reset.css">
+<link rel="stylesheet" href="//caioariede.github.io/css/pygments.css">
+<link rel="stylesheet" href="//caioariede.github.io/css/main.css">
+
+
+
+
+
+<link rel="shortcut icon"
+
+    href="//caioariede.github.io/img/leaf.ico"
+
+>
+
+
+
+
+
+
+</head>
+
+
+<body lang="en">
+
+<div class="section header narrow"> 
+    <div class="container">
+        <div class="content">
+            <nav>
+                <ul>
+                    <a href="//caioariede.github.io/posts/"><li>Posts</li></a>
+                    <a href="//caioariede.github.io/about/"><li>About</li></a>
+                    <a href="//caioariede.github.io/code/"><li>Code</li></a>
+                    
+                </ul>
+            </nav>
+            <a href="//caioariede.github.io/"><div class="name">Caio Ariede</div></a>
+        </div>
+    </div>
+</div>
+
+<div class="section icons narrow">
+    <div class="container">
+        <div class="content">
+
+        
+            <a href="//github.com/caioariede" target="_blank">
+                <i class="icon ion-social-github"></i>
+            </a>
+        
+        
+        
+            <a href="//twitter.com/caioariede" target="_blank">
+                <i class="icon ion-social-twitter"></i>
+            </a>
+        
+
+        
+            <a href="//linkedin.com/in/caioariede" target="_blank">
+                <i class="icon ion-social-linkedin"></i>
+            </a>
+        
+
+        
+
+        
+
+        
+            <a href="mailto:caio.ariede@gmail.com">
+                <i class="icon ion-ios-email larger"></i>
+            </a>
+        
+        </div>
+    </div>
+</div>
+
+
+<div class="section main post">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+                        <a href="//caioariede.github.io/posts/detecting-django-version/">Detecting Django Version</a>
+                    </div>
+                    <div class="initials"><a href="//caioariede.github.io/"></a></div>
+                </div>
+                <div class="meta">
+                    <div class="date" title="Fri Mar 2 2018 15:57:37 -03">Mar 2, 2018</div>
+                    <div class="reading-time"><div class="middot"></div>2 minutes read</div>
+                </div>
+            </div>
+            <div class="markdown">
+                <p>A few days ago, before doing a job interview I was studying the current tech
+stack of the company and started wondering how hard it would be to check which
+version of Django they were using.</p>
+
+<p>I first thought it wouldn&rsquo;t be trivial but I quickly figured out an easy way of
+doing it. The approach is really stupid and will not work on every case, the
+detection is only possible if the following requirements are met:</p>
+
+<ol>
+<li>The project is using <code>django.contrib.admin</code></li>
+<li>You managed to find the path to static files (usually, /static/)</li>
+</ol>
+
+<p>The idea is to verify the presence or absence of some files that are included
+or removed between two versions. In some cases, no files were included or
+removed, so in these cases I just checked for changes. I&rsquo;ve ended up with two
+basic checks:</p>
+
+<ul>
+<li>check if url exists</li>
+<li>check if url exists AND contains a certain text</li>
+</ul>
+
+<p><a href="https://github.com/caioariede/detect-django-version">The code</a> is something
+like this:</p>
+
+<pre><code>if url_exists(url):
+    return VERSION_1
+elif url_contains(url):
+    return VERSION_2
+...
+</code></pre>
+
+<p>With only these two checks, I was able to cover Django versions from 2.0 to 1.3.
+I&rsquo;ve done some tests myself and I&rsquo;m frankly surprised how effective this
+approach was for my tests. I was also surprised to see some websites still
+using Django 1.3, damn.</p>
+
+<p>I used the following script to perform my tests:</p>
+
+<pre><code>from detect import detect
+
+URLS = [
+    'http://example.com/static/admin',
+    ...
+]
+
+for url in urls:
+    print(url, detect(url))
+</code></pre>
+
+<p>Which gave me the following output:</p>
+
+<pre><code>http://www.*****.com/static/admin 1.11
+http://app.******.com/static/admin 1.11
+http://***.********.com/static/admin 1.11
+http://support.cdn.*******.net/static/admin 1.8
+http://dashboard.*******.com/static/admin 1.8
+http://www.*************.com/static/admin 1.4
+http://********.fr/static/admin 1.4
+https://*****.com/assets/admin 1.9
+https://login.*****.com/site_media/admin 1.10
+https://******.******.com/static/admin 1.8
+http://www.*************.com/media/static/admin 1.4
+http://www.*************.com/media/admin 1.3
+http://********.org.uk/adminmedia 1.3
+http://******.*****.it/static/admin 1.8
+http://www.******.com/media/admin 1.4
+http://www.*********.com/static/admin 1.6
+http://www.*******************.fr/static/admin 1.4
+https://www.*******.es/static/admin 1.4
+https://www.****************.com/static/admin 1.10
+http://*********************.de/static/admin 1.6
+</code></pre>
+
+<p>You can find the code in <a href="https://github.com/caioariede/detect-django-version">this repository</a>.
+If you want to propose an improvement, I&rsquo;ll be happy to see a pull request there. :)</p>
+
+                <br>
+                <p><a href="//caioariede.github.io/posts/">Back to posts</a></p>
+                <br>
+                <div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'caioariede';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+    var pageTracker = _gat._getTracker("UA-2174721-8");
+    pageTracker._trackPageview();
+} catch(err) {}
+</script>
+
+
+
+</body>
+</html>
+
